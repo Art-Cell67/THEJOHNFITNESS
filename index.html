@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The John Fitness — 1-on-1 Online Coaching</title>
+<meta name="description" content="Six weeks of 1-on-1 online training and nutrition coaching with Manish Kumar. Government-certified, 10+ years, hundreds of clients transformed.">
+<meta property="og:title" content="The John Fitness — 1-on-1 Online Coaching">
+<meta property="og:description" content="A six-week plan built around you. Training, nutrition and daily support on WhatsApp.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THE JOHN FITNESS
+   Palette : warm ink + bone + burnished brass
+   Type    : Archivo (display) / Newsreader (prose) / Plex Mono (data)
+   ============================================================ */
+
+:root{
+  --ink:#0E100F;
+  --ink-2:#151816;
+  --ink-3:#1D211E;
+  --bone:#EDE9E0;
+  --bone-2:#E3DED2;
+  --dim:#9AA09B;
+  --dim-dark:#5F655F;
+  --brass:#C8A951;
+  --brass-deep:#8A6F2B;
+  --line:rgba(237,233,224,.13);
+  --line-dark:rgba(14,16,15,.14);
+
+  --display:'Archivo',system-ui,sans-serif;
+  --prose:'Newsreader',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --pad:clamp(20px,5vw,64px);
+  --gap:clamp(56px,9vw,120px);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);color:var(--bone);
+  font-family:var(--prose);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--brass);color:var(--ink)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+.wrap{max-width:1180px;margin:0 auto;padding-inline:var(--pad)}
+.section{padding-block:var(--gap)}
+
+/* ---------- shared type ---------- */
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brass);
+  display:flex;align-items:center;gap:14px;margin-bottom:26px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:180px}
+.light .eyebrow{color:var(--brass-deep)}
+.light .eyebrow::after{background:var(--line-dark)}
+
+h2.head{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(31px,5.4vw,60px);line-height:.98;
+  letter-spacing:-.03em;text-transform:uppercase;max-width:16ch;
+}
+h2.head em{font-style:normal;color:var(--brass);display:block}
+.light h2.head em{color:var(--brass-deep)}
+
+.lede{
+  font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--dim);
+  max-width:56ch;margin-top:24px;font-weight:300;
+}
+.light .lede{color:var(--dim-dark)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:11px;
+  font-family:var(--display);font-weight:700;font-size:13.5px;
+  letter-spacing:.09em;text-transform:uppercase;
+  padding:16px 26px;border:1px solid var(--brass);
+  transition:background .25s ease,color .25s ease,transform .25s ease;
+}
+.btn--solid{background:var(--brass);color:var(--ink)}
+.btn--solid:hover{background:#D9BA62;transform:translateY(-2px)}
+.btn--ghost{color:var(--bone);border-color:var(--line)}
+.btn--ghost:hover{border-color:var(--brass);color:var(--brass)}
+.light .btn--ghost{color:var(--ink);border-color:var(--line-dark)}
+.light .btn--ghost:hover{border-color:var(--brass-deep);color:var(--brass-deep)}
+.btn .arw{transition:transform .25s ease}
+.btn:hover .arw{transform:translateX(4px)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px var(--pad);
+  transition:background .3s ease,border-color .3s ease,padding .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.stuck{background:rgba(14,16,15,.9);backdrop-filter:blur(14px);border-bottom-color:var(--line);padding-block:12px}
+.nav__mark{font-family:var(--display);font-weight:900;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+.nav__mark span{color:var(--brass)}
+.nav__cta{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);border-bottom:1px solid var(--brass-deep);padding-bottom:3px}
+.nav__cta:hover{color:var(--bone);border-color:var(--bone)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  padding-block:120px 56px;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 78% 18%,rgba(200,169,81,.10),transparent 60%),
+    linear-gradient(180deg,transparent 55%,rgba(0,0,0,.5));
+}
+.hero__grid{
+  position:relative;z-index:2;display:grid;gap:clamp(36px,6vw,64px);
+  grid-template-columns:1fr;align-items:center;width:100%;
+}
+h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(46px,10.6vw,112px);line-height:.86;
+  letter-spacing:-.045em;text-transform:uppercase;
+}
+h1 .brass{color:var(--brass)}
+.hero__sub{
+  font-size:clamp(17px,2.1vw,20px);line-height:1.6;color:var(--dim);
+  max-width:46ch;margin-top:28px;font-weight:300;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+
+/* portrait */
+.portrait{position:relative;width:100%;max-width:300px;aspect-ratio:1;justify-self:start}
+.portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08)}
+.portrait::after{
+  content:"";position:absolute;inset:0;
+  border:1px solid var(--brass);transform:translate(13px,13px);
+  pointer-events:none;
+}
+.portrait__mono{
+  display:none;place-items:center;width:100%;height:100%;
+  background:var(--ink-2);border:1px solid var(--line);
+  font-family:var(--display);font-weight:900;font-size:64px;
+  letter-spacing:-.04em;color:var(--brass-deep);
+}
+.portrait.is-empty img{display:none}
+.portrait.is-empty .portrait__mono{display:grid}
+.portrait__tag{
+  position:absolute;left:0;bottom:-34px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);
+}
+
+/* ---------- credentials strip ---------- */
+.strip{border-block:1px solid var(--line);background:var(--ink-2)}
+.strip__in{display:grid;grid-template-columns:repeat(2,1fr);}
+.cred{padding:26px var(--pad);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cred:nth-child(2n){border-right:0}
+.cred:nth-last-child(-n+2){border-bottom:0}
+.cred b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(26px,4.4vw,38px);letter-spacing:-.03em;line-height:1}
+.cred span{display:block;margin-top:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- offer cards ---------- */
+.offer{display:grid;gap:1px;background:var(--line);margin-top:56px;border:1px solid var(--line)}
+.offer__item{background:var(--ink);padding:clamp(26px,4vw,40px)}
+.offer__item h3{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.01em;text-transform:uppercase;margin-bottom:12px}
+.offer__item p{color:var(--dim);font-size:16.5px;font-weight:300;line-height:1.6}
+.offer__no{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--brass-deep);display:block;margin-bottom:18px}
+
+/* ---------- start steps ---------- */
+.steps{margin-top:56px;display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.step{background:var(--ink);padding:clamp(24px,3.6vw,36px);display:grid;gap:16px;align-items:start}
+.step__n{
+  font-family:var(--display);font-weight:900;font-size:44px;line-height:1;
+  letter-spacing:-.04em;color:transparent;
+  -webkit-text-stroke:1px var(--brass-deep);
+}
+.step h3{font-family:var(--display);font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px}
+.step p{color:var(--dim);font-size:16.5px;font-weight:300}
+
+/* ---------- SIGNATURE: the six-week spine (light) ---------- */
+.light{background:var(--bone);color:var(--ink)}
+.spine{position:relative;margin-top:60px;padding-left:clamp(46px,7vw,86px)}
+.spine__rail{position:absolute;left:clamp(9px,1.6vw,20px);top:6px;bottom:6px;width:1px;background:rgba(14,16,15,.16)}
+.spine__fill{position:absolute;left:0;top:0;width:1px;height:100%;background:var(--brass-deep);transform:scaleY(0);transform-origin:top}
+.wk{position:relative;padding-block:clamp(22px,3.4vw,34px);border-bottom:1px solid var(--line-dark)}
+.wk:last-child{border-bottom:0}
+.wk::before{
+  content:"";position:absolute;
+  left:calc(-1 * clamp(46px,7vw,86px) + clamp(6px,1.6vw,17px));
+  top:calc(clamp(22px,3.4vw,34px) + 11px);
+  width:7px;height:7px;background:var(--bone);border:1px solid var(--brass-deep);
+  border-radius:50%;transition:background .4s ease;
+}
+.wk.lit::before{background:var(--brass-deep)}
+.wk__n{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+  color:var(--brass-deep);display:block;margin-bottom:9px;
+}
+.wk h3{font-family:var(--display);font-weight:800;font-size:clamp(20px,3vw,27px);letter-spacing:-.015em;text-transform:uppercase;line-height:1.05}
+.wk p{color:var(--dim-dark);font-size:16.5px;font-weight:300;margin-top:9px;max-width:60ch}
+
+/* ---------- coach ---------- */
+.coach{display:grid;gap:clamp(34px,5vw,60px);grid-template-columns:1fr;align-items:start;margin-top:52px}
+.coach__body p{color:var(--dim);font-weight:300;margin-bottom:18px;max-width:56ch}
+.coach__body p:last-child{margin-bottom:0}
+.pull{
+  border-left:2px solid var(--brass);padding:6px 0 6px 22px;margin:30px 0;
+  font-family:var(--display);font-weight:600;font-size:clamp(18px,2.6vw,23px);
+  line-height:1.3;letter-spacing:-.015em;color:var(--bone);
+}
+
+/* ---------- results (reserved) ---------- */
+.results{display:grid;gap:14px;margin-top:52px}
+.slot{
+  aspect-ratio:4/5;border:1px solid var(--line);
+  background:
+    repeating-linear-gradient(135deg,rgba(200,169,81,.05) 0 1px,transparent 1px 11px),
+    var(--ink-2);
+  display:grid;place-items:center;text-align:center;padding:20px;
+}
+.slot span{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim-dark)}
+.results__note{margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim-dark);text-transform:uppercase}
+
+/* ---------- pricing ---------- */
+.price{
+  margin-top:52px;border:1px solid var(--brass-deep);background:var(--ink-2);
+  display:grid;grid-template-columns:1fr;
+}
+.price__main{padding:clamp(30px,4.6vw,50px);border-bottom:1px solid var(--line)}
+.price__tag{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.price__amt{font-family:var(--display);font-weight:900;font-size:clamp(48px,9vw,78px);line-height:.9;letter-spacing:-.05em;color:var(--brass)}
+.price__per{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.price__sub{color:var(--dim);font-weight:300;margin-top:20px;max-width:40ch;font-size:16.5px}
+.price__list{padding:clamp(30px,4.6vw,50px);display:grid;gap:13px;align-content:start}
+.price__list li{list-style:none;display:flex;gap:13px;font-size:16.5px;font-weight:300;color:var(--bone)}
+.price__list li::before{content:"";flex:none;width:6px;height:6px;margin-top:11px;background:var(--brass);transform:rotate(45deg)}
+.price__cta{padding:0 clamp(30px,4.6vw,50px) clamp(30px,4.6vw,50px)}
+
+/* ---------- faq ---------- */
+.faq{margin-top:48px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:22px 40px 22px 0;position:relative;
+  font-family:var(--display);font-weight:600;font-size:clamp(16px,2.2vw,19px);
+  letter-spacing:-.005em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:19px;color:var(--brass);transition:transform .25s ease;
+}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 24px;color:var(--dim);font-weight:300;max-width:62ch;font-size:16.5px}
+
+/* ---------- final cta ---------- */
+.final{text-align:center;border-top:1px solid var(--line);background:var(--ink-2)}
+.final h2{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(34px,7.4vw,78px);line-height:.92;letter-spacing:-.045em;
+  text-transform:uppercase;
+}
+.final h2 .brass{color:var(--brass)}
+.final p{color:var(--dim);max-width:44ch;margin:24px auto 0;font-weight:300}
+.final .btn{margin-top:34px}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--line);padding-block:40px;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim-dark)}
+.foot__in{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.foot a:hover{color:var(--brass)}
+.foot__links{display:flex;gap:22px;flex-wrap:wrap}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.22,.8,.3,1),transform .8s cubic-bezier(.22,.8,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(min-width:700px){
+  .strip__in{grid-template-columns:repeat(4,1fr)}
+  .cred{border-bottom:0}
+  .cred:nth-child(2n){border-right:1px solid var(--line)}
+  .cred:last-child{border-right:0}
+  .offer{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .results{grid-template-columns:repeat(3,1fr)}
+  .price{grid-template-columns:1.05fr .95fr}
+  .price__main{border-bottom:0;border-right:1px solid var(--line)}
+  .price__cta{grid-column:1/-1;border-top:1px solid var(--line);padding-top:clamp(26px,3.6vw,38px)}
+}
+@media(min-width:960px){
+  .hero__grid{grid-template-columns:1.35fr .65fr}
+  .portrait{justify-self:end;max-width:330px}
+  .coach{grid-template-columns:.85fr 1.15fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .btn,.wk::before{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav__mark">The John <span>Fitness</span></a>
+  <a class="nav__cta" href="https://wa.me/917838543838?text=Hi%20John%2C%20I%20want%20to%20book%20a%20consultation%20call%20for%20the%206-week%20plan." target="_blank" rel="noopener">Book a call</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="eyebrow rv">1-on-1 online coaching &middot; India &amp; worldwide</p>
+      <h1 class="rv">Six weeks.<br>Built <span class="brass">around you.</span></h1>
+      <p class="hero__sub rv">Training and nutrition designed for your body, your goals and the food you actually eat — with a government-certified coach in your corner on WhatsApp the whole way.</p>
+      <div class="hero__actions rv">
+        <a class="btn btn--solid" href="https://wa.me/917838543838?text=Hi%20John%2C%20I%20want%20to%20book%20a%20consultation%20call%20for%20the%206-week%20plan." target="_blank" rel="noopener">Book your consultation call <span class="arw">&rarr;</span></a>
+        <a class="btn btn--ghost" href="#program">See the six weeks</a>
+      </div>
+    </div>
+
+    <div class="portrait rv" data-portrait>
+      <img id="coachPhoto" alt="Manish Kumar, founder of The John Fitness">
+      <span class="portrait__mono">JF</span>
+      <span class="portrait__tag">Manish Kumar &middot; Head Coach</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CREDENTIALS ============ -->
+<section class="strip">
+  <div class="strip__in">
+    <div class="cred"><b>10+</b><span>Years coaching</span></div>
+    <div class="cred"><b>100s</b><span>Clients transformed</span></div>
+    <div class="cred"><b>6</b><span>Week programme</span></div>
+    <div class="cred"><b>Certified</b><span>Government recognised</span></div>
+  </div>
+</section>
+
+<!-- ============ OFFER ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow rv">The coaching</p>
+    <h2 class="head rv">One coach.<em>One client at a time.</em></h2>
+    <p class="lede rv">No app templates, no copy-pasted PDF. Everything below is built after a conversation with you, and it changes as you change.</p>
+
+    <div class="offer">
+      <div class="offer__item rv">
+        <span class="offer__no">01 &mdash; Training</span>
+        <h3>A routine written for you</h3>
+        <p>Your workout plan is built around your goal, your experience and the equipment you actually have access to — whether that's a full gym or a corner of your room.</p>
+      </div>
+      <div class="offer__item rv">
+        <span class="offer__no">02 &mdash; Nutrition</span>
+        <h3>Food you'll actually eat</h3>
+        <p>Nutrition guidance shaped around your routine, your preferences and your kitchen. Sustainable beats strict, every time.</p>
+      </div>
+      <div class="offer__item rv">
+        <span class="offer__no">03 &mdash; Support</span>
+        <h3>Direct line on WhatsApp</h3>
+        <p>Questions at 11pm, a meal you're unsure about, a session you had to move — message the coach directly. You are not talking to a support desk.</p>
+      </div>
+      <div class="offer__item rv">
+        <span class="offer__no">04 &mdash; Technique</span>
+        <h3>Form checked, not guessed</h3>
+        <p>Send a video of your lift and get it corrected. Good technique early is what makes the next six months possible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT STARTS ============ -->
+<section class="section" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow rv">Getting started</p>
+    <h2 class="head rv">Before anything<em>is written down.</em></h2>
+    <p class="lede rv">Three steps, and none of them are automated.</p>
+
+    <div class="steps">
+      <div class="step rv">
+        <span class="step__n">01</span>
+        <div>
+          <h3>Consultation call</h3>
+          <p>A proper conversation about where you are, where you want to be, and anything you're unsure about. Ask everything here.</p>
+        </div>
+      </div>
+      <div class="step rv">
+        <span class="step__n">02</span>
+        <div>
+          <h3>Consultation form</h3>
+          <p>A short form covering your history, schedule, injuries and food preferences. This is what turns a generic plan into yours.</p>
+        </div>
+      </div>
+      <div class="step rv">
+        <span class="step__n">03</span>
+        <div>
+          <h3>Your plan arrives</h3>
+          <p>Training and nutrition delivered together, walked through on WhatsApp so you start day one knowing exactly what to do.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGNATURE: SIX WEEKS ============ -->
+<section class="section light" id="program">
+  <div class="wrap">
+    <p class="eyebrow rv">The programme</p>
+    <h2 class="head rv">Inside the<em>six weeks.</em></h2>
+    <p class="lede rv">The plan is not handed over and forgotten. Here is the rhythm you can expect.</p>
+
+    <div class="spine" id="spine">
+      <div class="spine__rail"><div class="spine__fill" id="spineFill"></div></div>
+
+      <article class="wk rv">
+        <span class="wk__n">Week 01</span>
+        <h3>Plan goes live</h3>
+        <p>Your routine and nutrition land, and you're walked through both. Nothing is left for you to interpret on your own.</p>
+      </article>
+      <article class="wk rv">
+        <span class="wk__n">Week 02</span>
+        <h3>First form review</h3>
+        <p>You send videos of your key lifts and get them corrected — before poor habits become permanent ones.</p>
+      </article>
+      <article class="wk rv">
+        <span class="wk__n">Week 03</span>
+        <h3>First adjustment</h3>
+        <p>Loads, volume and intake are re-tuned against what actually happened in the first fortnight, not what was predicted.</p>
+      </article>
+      <article class="wk rv">
+        <span class="wk__n">Week 04</span>
+        <h3>Halfway review</h3>
+        <p>An honest look at the numbers and the mirror. What's working gets doubled down on, what isn't gets replaced.</p>
+      </article>
+      <article class="wk rv">
+        <span class="wk__n">Week 05</span>
+        <h3>Intensity earned</h3>
+        <p>Where your technique and recovery allow it, the work gets harder. This is the week the progress starts to show.</p>
+      </article>
+      <article class="wk rv">
+        <span class="wk__n">Week 06</span>
+        <h3>Results and what's next</h3>
+        <p>Where you started, where you finished, and a clear plan for holding it — with or without continued coaching.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COACH ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow rv">The coach</p>
+    <h2 class="head rv">Meet<em>Manish Kumar.</em></h2>
+
+    <div class="coach">
+      <div class="portrait rv" data-portrait style="max-width:340px">
+        <img class="coachPhoto" alt="Manish Kumar, government-certified fitness coach">
+        <span class="portrait__mono">JF</span>
+      </div>
+      <div class="coach__body rv">
+        <p>Ten years in the fitness industry, and a government-certified coach. In that time Manish has worked with hundreds of clients on fat loss, muscle building, body recomposition and general fitness — across India and internationally.</p>
+        <div class="pull">Long enough in this to know that the plan matters less than whether you can actually stick to it.</div>
+        <p>The John Fitness runs on one principle: coaching is a relationship, not a product. That's why every client starts with a call rather than a checkout page, and why the coach stays reachable for all six weeks rather than disappearing after the plan is sent.</p>
+        <p>If you're serious about the next six weeks, start with the call. It costs nothing and you'll know quickly whether this is right for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS (RESERVED) ============ -->
+<section class="section" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow rv">Client results</p>
+    <h2 class="head rv">The proof<em>lives here.</em></h2>
+    <p class="lede rv">Transformations and client words, national and international.</p>
+
+    <div class="results">
+      <div class="slot rv"><span>Transformation 01</span></div>
+      <div class="slot rv"><span>Transformation 02</span></div>
+      <div class="slot rv"><span>Transformation 03</span></div>
+    </div>
+    <p class="results__note rv">Section reserved &mdash; awaiting client media and testimonials</p>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow rv">Investment</p>
+    <h2 class="head rv">One plan.<em>Everything in it.</em></h2>
+
+    <div class="price rv">
+      <div class="price__main">
+        <div class="price__tag">
+          <span class="price__amt">&#8377;3,600</span>
+          <span class="price__per">/ six weeks</span>
+        </div>
+        <p class="price__sub">Paid once. No tiers, no upsells, no add-on fees for messaging your coach.</p>
+      </div>
+      <ul class="price__list">
+        <li>1-on-1 consultation call before you start</li>
+        <li>Personalised six-week training plan</li>
+        <li>Nutrition plan built around your diet</li>
+        <li>Daily WhatsApp access to your coach</li>
+        <li>Video form corrections throughout</li>
+        <li>Weekly adjustments as you progress</li>
+      </ul>
+      <div class="price__cta">
+        <a class="btn btn--solid" href="https://wa.me/917838543838?text=Hi%20John%2C%20I%20want%20to%20book%20a%20consultation%20call%20for%20the%206-week%20plan." target="_blank" rel="noopener">Book your consultation call <span class="arw">&rarr;</span></a>
+      </div>
+    </div>
+
+    <div class="faq">
+      <details class="rv"><summary>Do I need a gym membership?</summary><p>Not necessarily. Tell the coach what equipment you have on the consultation call and the plan is built to fit it — home setup, basic gym or full facility.</p></details>
+      <details class="rv"><summary>I'm outside India. Does that work?</summary><p>Yes. Coaching runs entirely over WhatsApp, and The John Fitness has worked with both national and international clients.</p></details>
+      <details class="rv"><summary>Will the nutrition plan suit what I eat at home?</summary><p>That's the point of the consultation form. The plan is built around your usual food, not an imported meal template you'll abandon in a week.</p></details>
+      <details class="rv"><summary>What happens after six weeks?</summary><p>You get a full review of where you started and where you finished, plus a clear direction for holding your results — whether or not you continue with coaching.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section final">
+  <div class="wrap">
+    <h2 class="rv">Start with a<br><span class="brass">conversation.</span></h2>
+    <p class="rv">Message the coach on WhatsApp and book your consultation call. Bring your questions.</p>
+    <a class="btn btn--solid rv" href="https://wa.me/917838543838?text=Hi%20John%2C%20I%20want%20to%20book%20a%20consultation%20call%20for%20the%206-week%20plan." target="_blank" rel="noopener">Book your consultation call <span class="arw">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>The John Fitness &copy; 2026</span>
+    <div class="foot__links">
+      <a href="https://www.instagram.com/thejohnfitness_" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/917838543838" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="#top">Back to top</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------
+   COACH PHOTO — swap this one line.
+   Put the Instagram profile picture at assets/coach.jpg,
+   or paste a direct image URL here instead.
+   If it fails to load, a "JF" monogram shows automatically.
+--------------------------------------------------------- */
+const COACH_PHOTO = "assets/coach.jpg";
+
+document.querySelectorAll('[data-portrait]').forEach(box=>{
+  const img = box.querySelector('img');
+  img.onerror = () => box.classList.add('is-empty');
+  img.src = COACH_PHOTO;
+});
+
+/* nav background on scroll */
+const nav = document.getElementById('nav');
+const onScroll = () => {
+  nav.classList.toggle('stuck', window.scrollY > 40);
+  drawSpine();
+};
+
+/* signature: the six-week rail fills as you read it */
+const spine = document.getElementById('spine');
+const fill  = document.getElementById('spineFill');
+const weeks = [...document.querySelectorAll('.wk')];
+
+function drawSpine(){
+  if(!spine) return;
+  const r = spine.getBoundingClientRect();
+  const mid = window.innerHeight * 0.62;
+  const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+  fill.style.transform = `scaleY(${p})`;
+  weeks.forEach(w=>{
+    w.classList.toggle('lit', w.getBoundingClientRect().top < mid);
+  });
+}
+
+/* reveal on scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      e.target.style.transitionDelay = (i * 70) + 'ms';
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+window.addEventListener('scroll', onScroll, {passive:true});
+window.addEventListener('resize', drawSpine);
+onScroll();
+</script>
+</body>
+</html>
