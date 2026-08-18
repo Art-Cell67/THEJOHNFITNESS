@@ -76,9 +76,8 @@ button{font:inherit;color:inherit;background:none;border:0}
 }
 .wrap{max-width:1180px;margin:0 auto;padding-inline:var(--pad);position:relative;z-index:2}
 .section{padding-block:var(--gap);position:relative;z-index:2}
-.rule{border-top:1px solid var(--line)}
 
-/* dotted seam divider (from the reference) */
+/* dotted seam divider */
 .seam{position:relative;z-index:2;height:1px;background:var(--line)}
 .seam::before{
   content:"";position:absolute;left:0;right:0;top:-3px;height:7px;
@@ -180,27 +179,31 @@ h1 .flame{background:linear-gradient(94deg,var(--flame) 15%,var(--amber));-webki
 .hero__actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:34px}
 .hero__spots{margin-top:24px}
 
-/* portrait */
-.portrait{position:relative;width:100%;max-width:300px;aspect-ratio:1;justify-self:start}
-.portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12) brightness(.95)}
-.portrait::before{
-  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(200deg,rgba(255,74,23,.22),transparent 55%);
-  mix-blend-mode:screen;
+/* ---------- PORTRAIT ----------
+   Sized to 260px so a small Instagram profile picture (usually 320px)
+   is never scaled UP, which is what makes it look soft or distorted.
+   Full colour, no overlay. */
+.portrait{
+  position:relative;width:100%;max-width:260px;aspect-ratio:1;
+  justify-self:start;background:var(--panel-2);
+}
+.portrait img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 30%;
+  filter:contrast(1.03) saturate(1.04);
 }
 .portrait::after{
   content:"";position:absolute;inset:0;pointer-events:none;
-  border:1px solid var(--flame);transform:translate(14px,14px);
+  border:1px solid var(--flame);transform:translate(13px,13px);
 }
 .portrait__mono{
   display:none;place-items:center;width:100%;height:100%;
   background:var(--panel-2);border:1px solid var(--line);
-  font-family:var(--display);font-size:62px;letter-spacing:.02em;
+  font-family:var(--display);font-size:58px;letter-spacing:.02em;
   background-image:linear-gradient(96deg,var(--flame),var(--amber));
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .portrait.is-empty img{display:none}
-.portrait.is-empty::before{display:none}
 .portrait.is-empty .portrait__mono{display:grid}
 .portrait__tag{position:absolute;left:0;bottom:-32px;font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--dim-2)}
 
@@ -232,7 +235,7 @@ h1 .flame{background:linear-gradient(94deg,var(--flame) 15%,var(--amber));-webki
 .step h3{font-family:var(--display);font-weight:400;font-size:21px;text-transform:uppercase;margin-bottom:10px}
 .step p{color:var(--dim)}
 
-/* ---------- SIGNATURE: SIX-WEEK SPINE ---------- */
+/* ---------- SIX-WEEK SPINE ---------- */
 .spine{position:relative;margin-top:56px;padding-left:clamp(46px,7vw,86px)}
 .spine__rail{position:absolute;left:clamp(9px,1.6vw,20px);top:6px;bottom:6px;width:1px;background:var(--line-2)}
 .spine__fill{position:absolute;left:0;top:0;width:1px;height:100%;transform:scaleY(0);transform-origin:top;
@@ -292,7 +295,6 @@ h1 .flame{background:linear-gradient(94deg,var(--flame) 15%,var(--amber));-webki
 .slot span{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--dim-2)}
 .results__note{margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim-2);text-transform:uppercase}
 
-/* testimonials */
 .quotes{display:grid;gap:14px;margin-top:44px}
 .quote{border:1px solid var(--line);background:var(--panel);padding:clamp(24px,3.4vw,32px)}
 .quote p{color:var(--bone);font-size:17px;line-height:1.6}
@@ -359,6 +361,7 @@ body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on summary,bod
   .nav__mark{display:none}
   .nav__apply{padding:12px 16px;font-size:11.5px}
   .ico{width:36px;height:36px}
+  .portrait{max-width:220px}
 }
 @media(min-width:700px){
   .strip__in{grid-template-columns:repeat(4,1fr)}
@@ -374,9 +377,9 @@ body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on summary,bod
   .price__cta{grid-column:1/-1;border-top:1px solid var(--line);padding-top:clamp(26px,3.6vw,38px)}
 }
 @media(min-width:960px){
-  .hero__grid{grid-template-columns:1.35fr .65fr}
-  .portrait{justify-self:end;max-width:330px}
-  .coach{grid-template-columns:.85fr 1.15fr}
+  .hero__grid{grid-template-columns:1.4fr .6fr}
+  .portrait{justify-self:end;max-width:280px}
+  .coach{grid-template-columns:.8fr 1.2fr}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -536,7 +539,7 @@ body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on summary,bod
     <h2 class="head rv">Meet<em>Manish Kumar.</em></h2>
 
     <div class="coach">
-      <div class="portrait rv" data-portrait style="max-width:340px">
+      <div class="portrait rv" data-portrait>
         <img class="coachPhoto" alt="Manish Kumar, Level 4 government-certified fitness coach">
         <span class="portrait__mono">JF</span>
       </div>
@@ -639,39 +642,34 @@ body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on summary,bod
 
 <script>
 /* =========================================================================
-   MEDIA CONFIG — this is the only part you edit to add photos and videos.
-   Drop files into an "assets" folder next to index.html.
-   Leave an array empty and the page shows tidy reserved slots instead.
+   MEDIA CONFIG — the only part you edit to add photos and videos.
+   Files live in an "assets" folder next to index.html.
    ========================================================================= */
 
-const COACH_PHOTO = "assets/coach.jpg";        // his Instagram profile picture
+const COACH_PHOTO = "assets/coach.jpg";   // change extension here if yours is .webp or .png
 
 const TRANSFORMATIONS = [
-  // Delete these three lines and uncomment the examples below once you have files.
-  // { name:"Rahul S.",  result:"12 weeks · 9 kg down",      before:"assets/rahul-before.jpg", after:"assets/rahul-after.jpg" },
-  // { name:"Priya M.",  result:"6 weeks · body recomp",     before:"assets/priya-before.jpg", after:"assets/priya-after.jpg" },
-  // { name:"Client C.", result:"Form breakdown",            video:"assets/client-c.mp4",      poster:"assets/client-c.jpg" },
+  // { name:"Rahul S.", result:"12 weeks · 9 kg down", before:"assets/rahul-before.jpg", after:"assets/rahul-after.jpg" },
+  // { name:"Client C.", result:"Form breakdown", video:"assets/client-c.mp4", poster:"assets/client-c.jpg" },
 ];
 
 const TESTIMONIALS = [
-  // { quote:"Text of what the client said.", name:"Rahul S., Delhi" },
+  // { quote:"What the client actually said.", name:"Rahul S., Delhi" },
 ];
 
 /* ========================= nothing below needs editing ================== */
 
-/* --- coach photo with monogram fallback --- */
 document.querySelectorAll('[data-portrait]').forEach(box=>{
   const img = box.querySelector('img');
   img.onerror = () => box.classList.add('is-empty');
   img.src = COACH_PHOTO;
 });
 
-/* --- build the results grid --- */
 const grid = document.getElementById('results');
 const note = document.getElementById('resultsNote');
 
 if(TRANSFORMATIONS.length){
-  grid.innerHTML = TRANSFORMATIONS.map((t,i)=>{
+  grid.innerHTML = TRANSFORMATIONS.map(t=>{
     const media = t.video
       ? `<video src="${t.video}" ${t.poster?`poster="${t.poster}"`:''} muted loop playsinline controls></video>`
       : `<img src="${t.before}" alt="${t.name} before">
@@ -683,7 +681,6 @@ if(TRANSFORMATIONS.length){
       </article>`;
   }).join('');
   note.remove();
-
   grid.querySelectorAll('[data-flip]').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const card = btn.closest('.card');
@@ -692,37 +689,32 @@ if(TRANSFORMATIONS.length){
     });
   });
 }else{
-  grid.innerHTML = [1,2,3].map(n=>
-    `<div class="slot rv"><span>Transformation 0${n}</span></div>`).join('');
+  grid.innerHTML = [1,2,3].map(n=>`<div class="slot rv"><span>Transformation 0${n}</span></div>`).join('');
   note.textContent = 'Section reserved — awaiting client media and testimonials';
   note.classList.add('rv');
 }
 
-/* --- testimonials --- */
 const quotesEl = document.getElementById('quotes');
 if(TESTIMONIALS.length){
   quotesEl.innerHTML = TESTIMONIALS.map(t=>
     `<blockquote class="quote rv"><p>${t.quote}</p><footer>${t.name}</footer></blockquote>`).join('');
 }
 
-/* --- custom cursor (pointer devices only) --- */
+/* custom cursor */
 if(window.matchMedia('(pointer:fine)').matches &&
    !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
   const ring = document.createElement('div'); ring.className='cur-ring';
   const dot  = document.createElement('div'); dot.className='cur-dot';
   document.body.append(ring,dot);
   document.body.classList.add('cursor-on');
-
   let tx=innerWidth/2, ty=innerHeight/2, rx=tx, ry=ty;
   addEventListener('mousemove',e=>{
     tx=e.clientX; ty=e.clientY;
     dot.style.transform=`translate(${tx}px,${ty}px)`;
-    const hot = e.target.closest('a,button,summary,[data-flip],details');
-    document.body.classList.toggle('cursor-hot', !!hot);
+    document.body.classList.toggle('cursor-hot', !!e.target.closest('a,button,summary,[data-flip],details'));
   },{passive:true});
   addEventListener('mouseleave',()=>document.body.classList.remove('cursor-on'));
   addEventListener('mouseenter',()=>document.body.classList.add('cursor-on'));
-
   (function loop(){
     rx += (tx-rx)*0.18; ry += (ty-ry)*0.18;
     ring.style.transform=`translate(${rx}px,${ry}px)`;
@@ -730,7 +722,7 @@ if(window.matchMedia('(pointer:fine)').matches &&
   })();
 }
 
-/* --- nav state + six-week rail --- */
+/* nav + spine */
 const nav   = document.getElementById('nav');
 const spine = document.getElementById('spine');
 const fill  = document.getElementById('spineFill');
@@ -749,7 +741,6 @@ function onScroll(){
   drawSpine();
 }
 
-/* --- reveal on scroll --- */
 const io = new IntersectionObserver(es=>{
   es.forEach((e,i)=>{
     if(e.isIntersecting){
